@@ -32,23 +32,30 @@ class AppServiceProvider extends ServiceProvider
 
         if (app()->isProduction()) {
             DB::whenQueryingForLongerThan(CarbonInterval::seconds(5), function (Connection $connection) {
-                //log 
-                // $connection->totalQueryDuration();
+                logger()
+                    ->channel('telegram')
+                    ->debug('whenQueryingForLongerThan: ' . $connection->totalQueryDuration());
             });
         }
 
         DB::listen(function ($query) {
-            // $query->sql
-            // $query->binding
-            // $query->time
             if ($query->time > 100) {
-                // log
+                logger()
+                    ->channel('telegram')
+                    ->debug(
+                        sprintf(
+                            "DB::listen\ntime: %s\nSQL: %s\nBinding: %s",
+                            $query->time,
+                            $query->sql,
+                            $query->bindings
+                        )
+                    );
             }
         });
 
         $kernel = app(Kernel::class);
         $kernel->whenRequestLifecycleIsLongerThan(CarbonInterval::seconds(4), function () {
-            //log
+            logger()->channel('telegram')->debug('whenRequestLifecycleIsLongerThan: ' . request()->url());
         });
     }
 }
