@@ -44,10 +44,9 @@ class AppServiceProvider extends ServiceProvider
                     ->channel('telegram')
                     ->debug(
                         sprintf(
-                            "DB::listen\ntime: %s\nSQL: %s\nBinding: %s",
+                        "DB::listen\ntime: %s\nSQL: %s\n",
                             $query->time,
-                            $query->sql,
-                            $query->bindings
+                        $query->sql
                         )
                     );
             }
