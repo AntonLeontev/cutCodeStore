@@ -2,12 +2,15 @@
 
 namespace App\Providers;
 
+use Faker\Factory;
 use App\Http\Kernel;
 use Carbon\CarbonInterval;
-use Illuminate\Support\ServiceProvider;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Connection;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Connection;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\ServiceProvider;
+use App\Providers\Faker\FakerImageProvider;
+use Faker\Generator;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -18,7 +21,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        
     }
 
     /**
@@ -36,21 +39,21 @@ class AppServiceProvider extends ServiceProvider
                     ->channel('telegram')
                     ->debug('whenQueryingForLongerThan: ' . $connection->totalQueryDuration());
             });
-        }
 
-        DB::listen(function ($query) {
-            if ($query->time > 100) {
-                logger()
-                    ->channel('telegram')
-                    ->debug(
-                        sprintf(
-                        "DB::listen\ntime: %s\nSQL: %s\n",
-                            $query->time,
-                        $query->sql
-                        )
-                    );
-            }
-        });
+            DB::listen(function ($query) {
+                if ($query->time > 100) {
+                    logger()
+                        ->channel('telegram')
+                        ->debug(
+                            sprintf(
+                                "DB::listen\ntime: %s\nSQL: %s\n",
+                                $query->time,
+                                $query->sql
+                            )
+                        );
+                }
+            });
+        }
 
         $kernel = app(Kernel::class);
         $kernel->whenRequestLifecycleIsLongerThan(CarbonInterval::seconds(4), function () {
