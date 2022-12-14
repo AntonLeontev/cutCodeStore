@@ -10,9 +10,13 @@ Route::get('/', HomeController::class)->name('home');
 
 Route::controller(AuthController::class)->group(function () {
     Route::get('/login', 'login')->name('login');
-    Route::post('/login', 'signIn')->name('sign-in');
+    Route::post('/login', 'signIn')
+    ->middleware('throttle::auth')
+    ->name('sign-in');
     Route::get('/register', 'register')->name('register');
-    Route::post('/register', 'store')->name('store');
+    Route::post('/register', 'store')
+    ->middleware('throttle::auth')
+    ->name('store');
     Route::get('/forgot-password', 'forgotPassword')
     ->middleware('guest')
     ->name('forgot-password');

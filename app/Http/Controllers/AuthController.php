@@ -66,7 +66,13 @@ class AuthController extends Controller
     {
         $status = Password::sendResetLink($request->only('email'));
 
-        return $status === Password::RESET_LINK_SENT ? back()->with(['message' => __($status)]) : back()->withErrors(['email' => __($status)]);
+        if ($status !== Password::RESET_LINK_SENT) {
+            return back()->withErrors(['email' => __($status)]);
+        }
+
+        flash()->info(__($status));
+
+        return back();
     }
 
     public function resetPassword($token)
@@ -89,9 +95,13 @@ class AuthController extends Controller
             }
         );
 
-        return $status === Password::PASSWORD_RESET
-            ? redirect()->route('login')->with('message', __($status))
-            : back()->withErrors(['email' => [__($status)]]);
+        if ($status !== Password::PASSWORD_RESET) {
+            return back()->withErrors(['email' => __($status)]);
+        }
+
+        flash()->info(__($status));
+
+        return redirect()->route('login');
     }
 
     public function logout()
