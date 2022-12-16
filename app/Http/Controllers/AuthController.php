@@ -101,7 +101,7 @@ class AuthController extends Controller
 
         flash()->info(__($status));
 
-        return redirect()->route('login');
+        return to_route('login');
     }
 
     public function logout()

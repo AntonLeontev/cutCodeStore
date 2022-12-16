@@ -25,13 +25,17 @@
         "mockery/mockery": "^1.4.4",
         "nunomaduro/collision": "^6.1",
         "phpunit/phpunit": "^9.5.10",
-        "spatie/laravel-ignition": "^1.0"
+        "spatie/laravel-ignition": "^1.0",
+        "worksome/request-factories": "^2.5"
     },
     "autoload": {
         "psr-4": {
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
-            "Database\\Seeders\\": "database/seeders/"
+            "Database\\Seeders\\": "database/seeders/",
+            "Src\\Domains\\": "src/Domains",
+            "Src\\Services\\": "src/Services",
+            "Src\\Support\\": "src/Support"
         },
         "files": [
             "app/Support/helpers.php"
