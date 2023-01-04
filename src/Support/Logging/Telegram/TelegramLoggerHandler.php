@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Logging\Telegram;
+namespace Src\Support\Logging\Telegram;
 
-use App\Services\Telegram\TelegramBotApi;
+use Src\Services\Telegram\TelegramBotApi;
 use Monolog\Handler\AbstractProcessingHandler;
 use Monolog\Logger;
 
