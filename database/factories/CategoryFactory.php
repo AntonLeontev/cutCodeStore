@@ -18,6 +18,7 @@ class CategoryFactory extends Factory
     {
         return [
             'title' => ucfirst($this->faker->words(2, true)),
+            'on_home' => $this->faker->numberBetween(0, 1),
         ];
     }
 }

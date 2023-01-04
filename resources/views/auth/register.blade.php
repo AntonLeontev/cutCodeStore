@@ -4,21 +4,21 @@
 
 @section('content')
     <x-forms.auth-form title="Регистрация" action="{{route('store')}}" method="POST">
-        <x-forms.text-input 
-            name="name" 
-            placeholder="Имя и фамилия" 
-            required='true' 
-            value="{{old('name')}}" 
+        <x-forms.text-input
+            name="name"
+            placeholder="Имя и фамилия"
+            required='true'
+            value="{{old('name')}}"
             :isError="$errors->has('name')"
         />
         @error('name')
             <x-forms.error>{{$message}}</x-forms.error>
         @enderror
-        <x-forms.text-input 
-            type="email" 
-            name="email" 
-            placeholder="E-mail" 
-            required='true' 
+        <x-forms.text-input
+            type="email"
+            name="email"
+            placeholder="E-mail"
+            required='true'
             value="{{old('email')}}"
             :isError="$errors->has('email')"
         />
@@ -44,7 +44,7 @@
         </div>
         <x-forms.primary-button>Зарегистрироваться</x-forms.primary-button>
 		<x-slot:social>
-			<a href="{{route('github.redirect')}}"
+			<a href="{{route('social.redirect', ['driver'=>'github'])}}"
             class="relative flex items-center h-14 px-12 rounded-lg border border-[#A07BF0] bg-white/20 hover:bg-white/20 active:bg-white/10 active:translate-y-0.5">
                 <svg class="shrink-0 absolute left-4 w-5 sm:w-6 h-5 sm:h-6" xmlns="http://www.w3.org/2000/svg"
                     fill="currentColor" viewBox="0 0 20 20">
