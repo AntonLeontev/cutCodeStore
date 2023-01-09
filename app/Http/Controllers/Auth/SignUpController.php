@@ -7,6 +7,7 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Hash;
 use Src\Domains\Auth\Contracts\RegisterNewUserContract;
+use Src\Domains\Auth\DTOs\NewUserDTO;
 use Src\Domains\Auth\Models\User;
 
 class SignUpController extends \App\Http\Controllers\Controller
@@ -18,12 +19,13 @@ class SignUpController extends \App\Http\Controllers\Controller
 
     public function handle(SignUpRequest $request, RegisterNewUserContract $action): RedirectResponse
     {
+        // $dto = new NewUserDTO(
+        //     $request->get('name'),
+        //     $request->get('email'),
+        //     $request->get('password')
+        // );
         //TODO DTOs
-        $action(
-            $request->get('name'),
-            $request->get('email'),
-            $request->get('password'),
-        );
+        $action(NewUserDTO::fromRequest($request));
 
         return redirect()->intended(route('home'));
     }

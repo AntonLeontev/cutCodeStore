@@ -2,16 +2,18 @@
 
 namespace App\Models;
 
-use App\Traits\Models\HasSlug;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Src\Support\Traits\Models\HasSlug;
 use Illuminate\Database\Eloquent\Model;
+use Src\Support\Traits\Models\HasThumbnail;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Product extends Model
 {
     use HasFactory;
     use HasSlug;
+    use HasThumbnail;
 
     protected $fillable = [
         'slug',
@@ -19,7 +21,13 @@ class Product extends Model
         'thumbnail',
         'price',
         'brand_id',
+        'on_home',
     ];
+
+    protected function thumbnailDir(): string
+    {
+        return 'products';
+    }
 
     public function brand(): BelongsTo
     {
