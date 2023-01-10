@@ -51,10 +51,6 @@ class Handler extends ExceptionHandler
             }
         });
 
-        $this->renderable(function (NotFoundHttpException $e) {
-            return response('404 err');
-        });
-
         $this->renderable(function(\DomainException $e) {
             flash()->alert($e->getMessage());
 

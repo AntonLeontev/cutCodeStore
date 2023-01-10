@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Storage;
 
-class InterventionController extends Controller
+class ThumbnailController extends Controller
 {
     public function __invoke(
         string $dir,
@@ -21,10 +21,16 @@ class InterventionController extends Controller
         );
 
         $storage = Storage::disk('image');
-
+		
         $realPath = "$dir/$file";
         $newDir = "$dir/$method/$size";
         $newFile = "$newDir/$file";
+		
+		abort_if(
+			!$storage->exists($realPath),
+			404,
+			'Can not find image'
+		);
 
         if ($storage->exists($newFile)) {
             return;

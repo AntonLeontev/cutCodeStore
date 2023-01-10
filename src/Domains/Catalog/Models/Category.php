@@ -1,12 +1,14 @@
 <?php
 
-namespace App\Models;
+namespace Src\Domains\Catalog\Models;
 
-use Src\Support\Traits\Models\HasSlug;
-use Illuminate\Database\Eloquent\Model;
-use Src\Support\Traits\Models\HasThumbnail;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use App\Models\Product;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Src\Domains\Catalog\QueryBuilders\CategoryQueryBuilder;
+use Src\Support\Traits\Models\HasSlug;
+use Src\Support\Traits\Models\HasThumbnail;
 
 class Category extends Model
 {
@@ -20,6 +22,11 @@ class Category extends Model
         'thumbnail',
         'on_home',
     ];
+
+	public function newEloquentBuilder($query)
+	{
+		return new CategoryQueryBuilder($query);
+	}
 
     protected function thumbnailDir(): string
     {

@@ -19,13 +19,9 @@ class SignUpController extends \App\Http\Controllers\Controller
 
     public function handle(SignUpRequest $request, RegisterNewUserContract $action): RedirectResponse
     {
-        // $dto = new NewUserDTO(
-        //     $request->get('name'),
-        //     $request->get('email'),
-        //     $request->get('password')
-        // );
-        //TODO DTOs
-        $action(NewUserDTO::fromRequest($request));
+        $user = $action(NewUserDTO::fromRequest($request));
+
+        auth()->login($user, true);
 
         return redirect()->intended(route('home'));
     }

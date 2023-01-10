@@ -2,15 +2,15 @@
 
 namespace App\Providers;
 
-use App\Contracts\RouteRegistrar;
+use Illuminate\Http\Request;
 use App\Routing\AppRegistrar;
+use App\Routing\AuthRegistrar;
+use App\Contracts\RouteRegistrar;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Contracts\Routing\Registrar;
-use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\RateLimiter;
-use Illuminate\Support\Facades\Route;
-use Src\Domains\Auth\Routing\AuthRegistrar;
+use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
 class RouteServiceProvider extends ServiceProvider
 {

@@ -10,16 +10,16 @@ use Src\Domains\Auth\Models\User;
 
 class RegisterNewUserAction implements RegisterNewUserContract
 {
-    public function __invoke(NewUserDTO $data)
+    public function __invoke(NewUserDTO $data): User
     {
-        $user = User::create([
+        $user =  User::create([
             'name' => $data->name,
             'email' => $data->email,
             'password' => Hash::make($data->password),
         ]);
 
-        auth()->login($user, true);
+		event(new Registered($user));
 
-        event(new Registered($user));
+		return $user;
     }
 }

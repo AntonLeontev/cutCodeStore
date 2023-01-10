@@ -22,7 +22,7 @@ class TelegramBotApiTest extends TestCase
             ->push(['ok' => true])
             ->push(['ok' => true])
             ->push()
-            ->push(['ok' => false]);
+            ->push([], 500);
     }
 
     public function test_request_data()

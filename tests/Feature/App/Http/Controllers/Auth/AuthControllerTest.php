@@ -1,8 +1,7 @@
 <?php
 
-namespace Tests\Feature\App\Http\Controllers;
+namespace Tests\Feature\App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Auth\SignInController;
@@ -22,8 +21,6 @@ use Tests\TestCase;
 
 class AuthControllerTest extends TestCase
 {
-    use RefreshDatabase;
-
     public function test_login_page()
     {
         $response = $this->get(action([SignInController::class, 'page']));
@@ -71,7 +68,6 @@ class AuthControllerTest extends TestCase
         $user = UserFactory::new()->create([
             'email' => 'test@ya.ru',
         ]);
-
         $this->actingAs($user)
             ->delete(action([SignInController::class, 'logout']));
 

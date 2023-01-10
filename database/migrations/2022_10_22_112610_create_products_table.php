@@ -1,11 +1,11 @@
 <?php
 
-use App\Models\Brand;
-use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Src\Domains\Catalog\Models\Brand;
+use Src\Domains\Catalog\Models\Category;
 
 return new class extends Migration
 {
