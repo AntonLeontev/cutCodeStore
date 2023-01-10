@@ -7,8 +7,10 @@ namespace Database\Seeders;
 use App\Models\Product;
 use Database\Factories\BrandFactory;
 use Database\Factories\CategoryFactory;
+use Database\Factories\CategoryProductFactory;
 use Database\Factories\ProductFactory;
 use Illuminate\Database\Seeder;
+use Src\Domains\Catalog\Models\Category;
 
 class DatabaseSeeder extends Seeder
 {
@@ -20,8 +22,13 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         BrandFactory::new()->count(10)->create();
-        CategoryFactory::new()->count(5)
-        ->has(ProductFactory::new()->count(rand(5, 15)))
-        ->create();
+        CategoryFactory::new()->count(7)
+			->has(Product::factory(rand(5, 15)))
+			->create();
+		
+		foreach(Product::all() as $product) {
+			$categories = Category::inRandomOrder()->take(rand(1, 2))->pluck('id');
+			$product->categories()->attach($categories);
+		}
     }
 }
