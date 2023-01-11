@@ -8,8 +8,8 @@
     <section>
         <!-- Section heading -->
         <h2 class="text-lg lg:text-[42px] font-black">Наши преимущества</h2>
-
         <!-- Advantages -->
+
         <div class="grid grid-cols-1 gap-3 mt-8 sm:grid-cols-2 2xl:grid-cols-4 sm:gap-4 md:gap-6">
             <div
                 class="flex flex-col items-center gap-2 px-4 py-6 text-center text-white md:py-8 md:px-6 rounded-xl bg-purple">

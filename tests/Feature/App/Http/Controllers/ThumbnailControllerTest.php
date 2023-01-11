@@ -2,19 +2,32 @@
 
 namespace Tests\Feature\App\Http\Controllers;
 
+use Database\Factories\ProductFactory;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
 class ThumbnailControllerTest extends TestCase
 {
-	public function test_creating_new_directory()
+	
+	public function test_ok()
 	{
-		Storage::fake('image');
+		$size = '500x500';
+		$method = 'fit';
+		$storage = Storage::disk('image');
 
-		Storage::disk('image')->assertMissing('/storage/images/products/resize/345x320');
-		//TODO
-		// $this->get('/storage/images/products/resize/345x320/test-image.jpg');
+		config()->set('thumbnail', ['allowed_sizes' => [$size]]);
 
-		// Storage::disk('image')->assertExists('/storage/images/products/resize/345x320');
+		$product = ProductFactory::new()->create();
+		
+		$response = $this->get($product->makeThumbnail($size, $method));
+
+		$response->assertOk();
+
+		$storage->assertExists(
+			"products/$method/$size/" . File::basename($product->thumbnail)
+		);
 	}
+
+
 }

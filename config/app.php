@@ -199,6 +199,8 @@ return [
         App\Providers\TestsServiceProvider::class,
         App\Providers\ViteServiseProvider::class,
         App\Providers\DomainServiceProvider::class,
+        App\Providers\ViewServiceProvider::class,
+
     ],
 
 

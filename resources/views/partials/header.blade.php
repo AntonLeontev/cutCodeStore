@@ -15,11 +15,7 @@
 							</svg>
 						</button>
 					</form>
-					<nav class="hidden gap-8 2xl:flex">
-						<a href="{{ route('home') }}" class="font-bold text-white hover:text-pink">Главная</a>
-						<a href="{{route('catalog')}}" class="font-bold text-white hover:text-pink">Каталог товаров</a>
-						<a href="#" class="font-bold text-white hover:text-pink">Корзина</a>
-					</nav>
+					<x-menu.index :$menu />
 				</div><!-- /.header-menu -->
 				<div class="flex items-center gap-3 header-actions md:gap-5">
 					@guest

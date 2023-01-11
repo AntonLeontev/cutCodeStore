@@ -1,7 +1,7 @@
 <!-- Product card -->
 <div class="flex flex-col product-card rounded-3xl bg-card">
 	<a href="#" class="product-card-photo overflow-hidden h-[320px] rounded-3xl">
-		<img src="{{$product->makeThumbnail('345x320')}}" class="object-cover w-full h-full" alt="{{$product->title}}">
+		<img src="{{$product->makeThumbnail('345x320', 'fit')}}" class="object-cover w-full h-full" alt="{{$product->title}}">
 	</a>
 	<div class="flex flex-col px-6 py-8 grow">
 		<h3 class="text-sm font-black lg:text-md"><a href="#" class="inline-block text-white hover:text-pink">{{$product->title}}</a></h3>
