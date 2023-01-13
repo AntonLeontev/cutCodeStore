@@ -23,7 +23,7 @@
 				</a>
 			@elseauth
 				<div class="flex items-center">
-					<img src="./images/avatar.jpg" class="rounded-full w-14 h-14" alt="{{ auth()->user()->name }}">
+					<img src="{{ auth()->user()->avatar }}" class="rounded-full w-14 h-14" alt="{{ auth()->user()->name }}">
 					<div class="flex flex-col items-start ml-4">
 						<span class="text-xs font-bold text-dark md:text-sm">{{ auth()->user()->name }}</span>
 						<div class="inline-flex items-center cursor-pointer text-dark hover:text-pink">

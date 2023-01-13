@@ -12,9 +12,9 @@ class CatalogController extends Controller
 {
     public function __invoke(?Category $category)
 	{
-		$brands = Brand::select(['id', 'title'])->has('products')->get();
-
-		$categories = Category::select(['id', 'title', 'slug'])->has('products')->get();
+		$categories = Category::select(['id', 'title', 'slug'])
+			->has('products')
+			->get();
 			
 		$products = Product::search(request('search'))
 			->query(function(Builder $query) use ($category){
@@ -30,7 +30,6 @@ class CatalogController extends Controller
 
 		return view('catalog.index', [
 			'activeCategory' => $category, 
-			'brands' => $brands, 
 			'categories' => $categories, 
 			'products' => $products
 		]);

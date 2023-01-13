@@ -7,6 +7,8 @@
 		<h3 class="text-sm font-black lg:text-md"><a href="#" class="inline-block text-white hover:text-pink">{{$product->title}}</a></h3>
 		<div class="pt-6 mt-auto">
 			<div class="mb-3 text-sm font-semibold">{{$product->price}}</div>
+			{{-- <div class="mb-3 text-sm font-semibold">Бренд: {{$product->brand->title}}</div>
+			<div class="mb-3 text-sm font-semibold">Кат: {{$product->categories->first()->title}}</div> --}}
 			<div class="flex flex-wrap items-center gap-4">
 				<a href="#" class="w-[56px] !h-[56px] !px-0 btn btn-pink">
 					<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="currentColor" viewBox="0 0 52 52">

@@ -33,18 +33,11 @@ return new class extends Migration
                 ->cascadeOnUpdate()
                 ->nullOnDelete();
 
-            $table->foreignIdFor(Category::class)
-                ->nullable()
-                ->constrained()
-                ->cascadeOnUpdate()
-                ->nullOnDelete();
-
             $table->timestamps();
         });
 
 
         Schema::create('category_product', function (Blueprint $table) {
-            $table->id();
             $table->foreignIdFor(Category::class)
                 ->constrained()
                 ->cascadeOnDelete()
@@ -65,8 +58,8 @@ return new class extends Migration
     public function down()
     {
         if (app()->isLocal()) {
-            Schema::dropIfExists('category_product');
             Schema::dropIfExists('products');
+            Schema::dropIfExists('category_product');
         }
     }
 };
